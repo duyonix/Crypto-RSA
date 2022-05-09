@@ -6,5 +6,5 @@ python -c 'print("Hex code for `I owe you $2000`: " + "I owe you $2000".encode("
 python -c 'print("Hex code for `I owe you $3000`: " + "I owe you $2000".encode("hex"))'
 
 # compile source.c then run
-g++ -o source source.cpp -lcrypto
-./source
+g++ -o run source.cpp -lcrypto
+./run
