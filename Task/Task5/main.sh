@@ -1,2 +1,2 @@
-g++ source.cpp -lcrypto
-./a.out
+g++ -o source source.cpp -lcrypto
+./source

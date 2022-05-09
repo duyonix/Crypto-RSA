@@ -2,13 +2,11 @@
 #include <openssl/bn.h>
 #define NBITS 128
 
-void printBN(char *msg, BIGNUM *a, BIGNUM *b)
+void printBN(char *msg, BIGNUM *a)
 {
-    char *number_str_a = BN_bn2hex(a);
-    char *number_str_b = BN_bn2hex(b);
-    printf("%s (%s,%s)\n", msg, number_str_a, number_str_b);
-    OPENSSL_free(number_str_a);
-    OPENSSL_free(number_str_b);
+    char *num_str = BN_bn2hex(a);
+    printf("%s %s\n", msg, num_str);
+    OPENSSL_free(num_str);
 }
 
 int main()
@@ -25,16 +23,15 @@ int main()
     BIGNUM *p_minus_1 = BN_new();
     BIGNUM *q_minus_1 = BN_new();
 
-    // assign value
+    // set value
     BN_hex2bn(&p, "F7E75FDC469067FFDC4E847C51F452DF");
     BN_hex2bn(&q, "E85CED54AF57E53E092113E62F436F4F");
     BN_hex2bn(&e, "0D88C3");
 
-    // n = pq
+    // n = p * q
     BN_mul(n, p, q, ctx);
-    printBN("public key", e, n);
 
-    // phi(n) = (p-1)*(q-1)
+    // phi(n) = (p - 1)*(q - 1)
     BN_sub(p_minus_1, p, BN_value_one());
     BN_sub(q_minus_1, q, BN_value_one());
     BN_mul(phi, p_minus_1, q_minus_1, ctx);
@@ -48,8 +45,9 @@ int main()
     }
 
     BN_mod_inverse(d, e, phi, ctx);
-    printBN("private key", d, n);
+    printBN("private key d =", d);
 
+    // clear sensitive data
     BN_clear_free(p);
     BN_clear_free(q);
     BN_clear_free(n);

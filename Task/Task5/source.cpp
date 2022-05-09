@@ -10,16 +10,18 @@ void printBN(char *msg, BIGNUM *a)
     OPENSSL_free(number_str_a);
 }
 
-std::string string_to_hex(const std::string& in) {
-    //https://stackoverflow.com/a/16125797
+std::string string_to_hex(const std::string &in)
+{
+    // https://stackoverflow.com/a/16125797
     std::stringstream ss;
 
     ss << std::hex << std::setfill('0');
-    for (size_t i = 0; in.length() > i; ++i) {
+    for (size_t i = 0; in.length() > i; ++i)
+    {
         ss << std::setw(2) << static_cast<unsigned int>(static_cast<unsigned char>(in[i]));
     }
 
-    return ss.str(); 
+    return ss.str();
 }
 
 int main()
@@ -36,7 +38,7 @@ int main()
     BN_hex2bn(&M, string_to_hex("Launch a missile.").c_str());
     BN_hex2bn(&S, "643D6F34902D9C7EC90CB0B2BCA36C47FA37165C0005CAB026C0542CBDB6802F");
 
-    //tinh mr = s^e mod n
+    // tinh mr = s^e mod n
     BN_mod_exp(mr, S, e, n, ctx);
 
     // Kiem tra mr thuoc Mr
