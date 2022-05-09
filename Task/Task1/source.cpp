@@ -1,11 +1,17 @@
-#include <stdio.h>
+#include <iostream>
+#include <cstring>
+#include <string>
 #include <openssl/bn.h>
 #define NBITS 128
+using namespace std;
 
-void printBN(char *msg, BIGNUM *a)
+void printBN(string msg, BIGNUM *a)
 {
+    char message[msg.size() + 1];
+    strcpy(message, msg.c_str());
     char *num_str = BN_bn2hex(a);
-    printf("%s %s\n", msg, num_str);
+
+    cout << msg << " " << num_str << endl;
     OPENSSL_free(num_str);
 }
 
@@ -40,12 +46,12 @@ int main()
     BN_gcd(res, phi, e, ctx);
     if (!BN_is_one(res))
     {
-        printf("Error: e and phi(n) is not relatively prime \n ");
+        cout << "Error: e and phi(n) is not relatively prime\n";
         exit(0);
     }
 
     BN_mod_inverse(d, e, phi, ctx);
-    printBN("private key d =", d);
+    printBN("Private Key d =", d);
 
     // clear sensitive data
     BN_clear_free(p);

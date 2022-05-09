@@ -6,5 +6,5 @@ python -c 'print("Hex code for `A top secret!`: " + "A top secret!".encode("hex"
 # -> result: "4120746f702073656372657421"
 
 # compile source.c then run
-gcc -o source source.c -lcrypto
+g++ -o source source.cpp -lcrypto
 ./source

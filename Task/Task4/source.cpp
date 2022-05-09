@@ -1,10 +1,17 @@
-#include <stdio.h>
+#include <iostream>
+#include <cstring>
+#include <string>
 #include <openssl/bn.h>
+#define NBITS 128
+using namespace std;
 
-void printBN(char *msg, BIGNUM *a)
+void printBN(string msg, BIGNUM *a)
 {
+    char message[msg.size() + 1];
+    strcpy(message, msg.c_str());
     char *num_str = BN_bn2hex(a);
-    printf("%s %s\n", msg, num_str);
+
+    cout << msg << " " << num_str << endl;
     OPENSSL_free(num_str);
 }
 

@@ -2,5 +2,5 @@
 set -e
 
 # compile source.c then run
-gcc -o source source.c -lcrypto
+g++ -o source source.cpp -lcrypto
 ./source
