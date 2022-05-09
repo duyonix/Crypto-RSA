@@ -3,9 +3,9 @@
 
 void printBN(char *msg, BIGNUM *a)
 {
-    char *number_str_a = BN_bn2hex(a);
-    printf("%s %s\n", msg, number_str_a);
-    OPENSSL_free(number_str_a);
+    char *num_str = BN_bn2hex(a);
+    printf("%s %s\n", msg, num_str);
+    OPENSSL_free(num_str);
 }
 
 int main()
@@ -19,17 +19,21 @@ int main()
     BIGNUM *C1 = BN_new();
     BIGNUM *C2 = BN_new();
 
-    // assign values
+    // set value
     BN_hex2bn(&n, "DCBFFE3E51F62E09CE7032E2677A78946A849DC4CDDE3A4D0CB81629242FB1A5");
     BN_hex2bn(&d, "74D806F9F3A62BAE331FFE3F0A68AFE35B3D2E4794148AACBC26AA381CD7D30D");
-    BN_hex2bn(&M1, "49206f776520796f75202432303030"); // hex encode for "I owe you $2000"
-    BN_hex2bn(&M2, "49206f776520796f75202433303030"); // hex encode for "I owe you $3000"
+
+    // hex encode for "I owe you $2000"
+    BN_hex2bn(&M1, "49206f776520796f75202432303030");
+
+    // hex encode for "I owe you $3000"
+    BN_hex2bn(&M2, "49206f776520796f75202433303030");
 
     // encrypt M: M^d mod n
     BN_mod_exp(C1, M1, d, n, ctx);
     BN_mod_exp(C2, M2, d, n, ctx);
-    printBN("Signature of M1:", C1);
-    printBN("Signature of M2:", C2);
+    printBN("M1 Signature Output:", C1);
+    printBN("M2 Signature Output:", C2);
 
     // clear sensitive data
     BN_clear_free(n);
