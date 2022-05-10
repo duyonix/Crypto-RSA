@@ -19,6 +19,7 @@ int getFirstNumber(string s)
 {
     for (int i = 0; i < s.length(); i++)
     {
+        // gap ki tu so, thi lay tiep cac ki tu so tiep theo cho den khi gap ki tu khong phai so, ghep nhung ki tu do thanh 1 int
         if (isNum(s[i]))
         {
             int num = s[i] - '0';
@@ -41,7 +42,7 @@ int main()
 
     string s;
     f >> s;
-    s = s.substr(8);
+    s = s.substr(8); // bo "Modulus="
 
     BN_CTX *ctx = BN_CTX_new();
     BIGNUM *n = BN_new();
@@ -55,6 +56,7 @@ int main()
 
     while (getline(f, s))
     {
+        // tim thay dong co chu "Exponent" thi lay so dau tien trong dong do
         if (s.find("Exponent") != std::string::npos)
         {
             e = getFirstNumber(s);
@@ -67,8 +69,7 @@ int main()
     cout << "n = ";
     printBN(n);
 
-    cout << "\ne = "
-         << e << endl;
+    cout << "\ne = " << e << endl;
 
     f.open("publicKey.txt", ios::out);
     f << BN_bn2hex(n) << " " << e;

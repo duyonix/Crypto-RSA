@@ -4,7 +4,7 @@ using namespace std;
 
 void goToTheSignature(fstream &f)
 {
-    // tim vi tri cuoi cung cua chuoi "Signature Algorithm"
+    // tim vi tri cuoi cung cua chuoi "Signature Algorithm" va chuyen con tro file toi do
     int pos = 0;
     string s;
     while (getline(f, s))
@@ -27,6 +27,7 @@ int main()
 
     goToTheSignature(f);
 
+    // doc het cho toi khi gap dong khong co dau ":" thi dung (het signature)
     while (getline(f, s))
     {
         if (s.find(":") == std::string::npos)
