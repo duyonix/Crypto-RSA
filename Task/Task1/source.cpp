@@ -37,7 +37,7 @@ int main()
     // n = p * q
     BN_mul(n, p, q, ctx);
 
-    // phi(n) = (p - 1)*(q - 1)
+    // phi(n) = (p - 1) * (q - 1)
     BN_sub(p_minus_1, p, BN_value_one());
     BN_sub(q_minus_1, q, BN_value_one());
     BN_mul(phi, p_minus_1, q_minus_1, ctx);
@@ -50,6 +50,7 @@ int main()
         exit(0);
     }
 
+    // d = e^-1 mod phi(n)
     BN_mod_inverse(d, e, phi, ctx);
     printBN("Private Key d =", d);
 
