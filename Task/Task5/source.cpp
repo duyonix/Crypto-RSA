@@ -41,6 +41,9 @@ int main()
     // tinh mr = s^e mod n
     BN_mod_exp(mr, S, e, n, ctx);
 
+    std::cout << "M = " << BN_bn2hex(M) << "\n\n";
+    std::cout << "mr = " << BN_bn2hex(mr) << "\n\n";
+
     // Kiem tra mr thuoc Mr
     if (BN_cmp(mr, M) == 0)
     {

@@ -1,3 +1,7 @@
 *.bin
 **/run
 .vscode
+Task/Task6/*.txt
+Task/Task6/*.pem
+Task/Task6/signature
+Task/Task6/signatureWithSpacesAndColons

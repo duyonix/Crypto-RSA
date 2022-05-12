@@ -39,9 +39,9 @@ void getPaddedHashedMessage(BIGNUM *&M)
 
     string prefix = "0001";
     string A = "3031300D060960864801650304020105000420"; // SHA-256 DER Encoding, https://datatracker.ietf.org/doc/html/rfc3447, page 42
-    int total_len = 256;
+    int totalLength = 256;                               // vi kich thuoc cua n va signature deu la 256
 
-    int padLength = total_len - 1 - (A.length() + prefix.length() + serverCertBodyHashed.length()) / 2;
+    int padLength = totalLength - 1 - (A.length() + prefix.length() + serverCertBodyHashed.length()) / 2;
     string padString = "";
     for (int i = 0; i < padLength; i++)
         padString += "FF";
@@ -61,8 +61,8 @@ int main()
 
     getPublicKey(n, e);
     getSignature(S);
-    getPaddedHashedMessage(M);
 
+    getPaddedHashedMessage(M);
     printBN("Padded hashed server certificate body:\n", M);
 
     BN_mod_exp(mr, S, e, n, ctx);
