@@ -1,4 +1,4 @@
-#~/bin/bash
+#!/bin/bash
 set -e
 
 # compile source.c then run
