@@ -42,11 +42,11 @@ int main()
     BN_sub(q_minus_1, q, BN_value_one());
     BN_mul(phi, p_minus_1, q_minus_1, ctx);
 
-    // check if e and phi(n) is relatively prime
+    // check if e and phi(n) is coprime
     BN_gcd(res, phi, e, ctx);
     if (!BN_is_one(res))
     {
-        cout << "Error: e and phi(n) is not relatively prime\n";
+        cout << "Error: e and phi(n) is not coprime\n";
         exit(0);
     }
 
